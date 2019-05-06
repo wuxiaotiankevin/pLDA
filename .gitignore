@@ -1,3 +1,7 @@
+# build
+*.o
+*.so
+
 # Mac
 .DS_Store
 
