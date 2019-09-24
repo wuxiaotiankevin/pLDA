@@ -48,14 +48,6 @@ runPLDA <- function(dat, k, lambda, fpath=NA) {
 }
 
 
-# logit
-# input matrix with entries in (0, 1)
-# output logit of matrix
-#' @export
-logit <- function(x) {
-  log(x/(1-x))
-}
-
 # input
 # dat: input data for ICA, gene by sample
 # k: number of components to be extracted

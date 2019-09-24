@@ -11,7 +11,7 @@ The package is maintained by Xiaotian (Kevin) Wu. Contact xiaotian_wu at brown d
 ```
 git clone https://github.com/wuxiaotiankevin/pLDA
 R CMD build pLDA
-R CMD INSTALL pLDA_0.1.1.tar.gz
+R CMD INSTALL pLDA_0.1.2.tar.gz
 ```
 
 ## Quick Start

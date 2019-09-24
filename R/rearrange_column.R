@@ -15,10 +15,10 @@
 #' @return Vector of order to be applied to columns of mat2.
 #' @examples 
 #' \dontrun{
-#' column_order <- greedyRearrangeColumn(mat1, mat2)
+#' column_order <- GreedyRearrangeColumn(mat1, mat2)
 #' mat2 <- mat2[, column_order]
 #' }
-greedyRearrangeColumn <- function(mat1, mat2) {
+GreedyRearrangeColumn <- function(mat1, mat2) {
   ncol <- ncol(mat1)
   not_picked_col <- 1:ncol
   res <- numeric()
@@ -35,5 +35,29 @@ greedyRearrangeColumn <- function(mat1, mat2) {
   return(res)
 }
 
+
+#' Rearrange columns in mat2 to align with mat1, using l2 distance
+#' 
+#' Rearrange columns in mat2 to align with mat1, using l2 distance
+#' @export
+#' @param mat1 Matrix to align to.
+#' @param mat2 Matrix to be rearranged.
+#' @return Vector of order to be applied to columns of mat2.
+#' @examples 
+#' \dontrun{
+#' column_order <- PermutationRearrangeColumn(mat1, mat2)
+#' mat2 <- mat2[, column_order]
+#' }
+PermutationRearrangeColumn <- function(mat1, mat2) {
+  m <- ncol(mat1)
+  perms <- gtools::permutations(m, m)
+  
+  dist <- c()
+  for (i in 1:nrow(perms)) {
+    dist <- c(dist, norm(mat1 - mat2[, perms[i, ]], type = "F"))
+  }
+  
+  return(perms[which.min(dist), ])
+}
 
 

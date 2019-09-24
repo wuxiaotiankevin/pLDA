@@ -12,6 +12,7 @@ get_n_interesting_genes <- function(dat, k, lam, idx_hk, cutoff, warm.start.log.
   #   fpath <- paste0('../output/plda_ntopics_', k, '_lambda_', lam, '.rdata')
   # }
   fpath <- file.path(fpath, paste0('plda_ntopics_', k, '_lambda_', lam, '.rdata'))
+  print(fpath)
   set.seed(seed)
   # run plda and save
   if (file.exists(fpath)) {
@@ -57,15 +58,14 @@ get_n_interesting_genes <- function(dat, k, lam, idx_hk, cutoff, warm.start.log.
 #' \dontrun{
 #' plda_choose_lambda(dat=cell_by_gene_expr_matrix, k=10, lam_values=c(10, 10^2, 10^3),  idx_hk = 1:10)
 #' }
-plda_choose_lambda <- function(dat, k, lam_values, idx_hk, njobs=1, n_rep=1, fdir=NA, seed=2018) {
-  require(plyr)
+plda_choose_lambda <- function(dat, k, lam_values, idx_hk, njobs=1, n_rep=1, fdir=NA, seed=2019) {
   set.seed(seed)
   if (is.na(fdir)) {
     fdir <- '../output/'
   }
   print(paste0('Calculating for ', k, ' topics.'))
   # create output fulder
-  dir.create(fdir, showWarnings = FALSE)
+  dir.create(fdir, showWarnings = FALSE, recursive = TRUE)
   # run LDA and save
   if (file.exists(file.path(fdir, paste0('lda_ntopics_', k, '.rdata')))) {
     load(file.path(fdir, paste0('lda_ntopics_', k, '.rdata')))
@@ -88,14 +88,26 @@ plda_choose_lambda <- function(dat, k, lam_values, idx_hk, njobs=1, n_rep=1, fdi
     for (lam in lam_values) {
       set.seed(seed)
       print(paste0('Processing lambda=',lam, '...'))
-      tmp <- get_n_interesting_genes(dat, k, lam, idx_hk, cutoff, warm.start.log.beta=warm.start.log.beta, fpath = fdir)
+      tmp <- get_n_interesting_genes(dat, 
+                                     k, 
+                                     lam, 
+                                     idx_hk, 
+                                     cutoff, 
+                                     warm.start.log.beta=warm.start.log.beta, 
+                                     fpath = fdir)
       res <- rbind(res, rbind.fill(tmp))
     }
   } else if (njobs>1) {
     set.seed(seed)
     print(paste0('Running ', njobs, ' jobs in parallel.'))
     tmp <- mclapply(1:length(lam_values), 
-                    function(x) get_n_interesting_genes(dat, k, lam_values[x], idx_hk, cutoff, warm.start.log.beta=warm.start.log.beta, fpath = fdir), 
+                    function(x) get_n_interesting_genes(dat, 
+                                                        k, 
+                                                        lam_values[x], 
+                                                        idx_hk, 
+                                                        cutoff, 
+                                                        warm.start.log.beta=warm.start.log.beta, 
+                                                        fpath = fdir), 
                     mc.cores = njobs)
     res <- rbind(res, do.call(rbind, tmp))
   }

@@ -1,17 +1,17 @@
 Package: pLDA
 Type: Package
 Title: The pLDA Package
-Version: 0.1.1
-Date: 2018-10-31
+Version: 0.1.2
+Date: 2019-09-23
 Author: Xiaotian Wu, Zhijin Wu, Hao Wu, Xiaoyu Wei
 Maintainer: Xiaotian Wu <xiaotian_wu@brown.edu>
 Description: Single cell RNA sequencing (scRNA-seq) is a recently developed technology that allows quantification of RNA transcripts at individual cell level, providing cellular level resolution of gene expression variation. The scRNA-seq data are counts of RNA transcripts of all genes in species' genome. We adapt the Latent Dirichlet Allocation (LDA), a generative probabilistic model originated in natural language processing (NLP), to model the scRNA-seq data by considering genes as words and cells as documents, and latent biological functions as topics. In LDA, each documents is considered as the result of words generated from a mixture of topics, each with a different word usage frequency profile. We propose a penalized version of LDA to reflect the structure in scRNAseq, that only a small subset of genes are expected to be topic-specific. We apply the penalized LDA to two scRNA-seq data sets to illustrate the usefulness of the model. Using inferred topic frequency instead of word frequency substantially improves the accuracy in cell type classification. Here we provide an efficient implementation of penalized LDA in R.
 License: GPL (>= 2)
-Imports: Rcpp (>= 0.12.16),topicmodels,Matrix
-Depends: Rcpp (>= 0.12.16),topicmodels,Matrix
+Imports: Rcpp (>= 0.12.16),topicmodels,Matrix,plyr,parallel,gtools
+Depends: Rcpp (>= 0.12.16),topicmodels,Matrix,plyr,parallel,gtools
 LinkingTo: Rcpp
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Encoding: UTF-8
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
