@@ -12,7 +12,7 @@ get_n_interesting_genes <- function(dat, k, lam, idx_hk, cutoff, warm.start.log.
   #   fpath <- paste0('../output/plda_ntopics_', k, '_lambda_', lam, '.rdata')
   # }
   fpath <- file.path(fpath, paste0('plda_ntopics_', k, '_lambda_', lam, '.rdata'))
-  print(fpath)
+  # print(fpath)
   set.seed(seed)
   # run plda and save
   if (file.exists(fpath)) {
@@ -52,7 +52,7 @@ get_n_interesting_genes <- function(dat, k, lam, idx_hk, cutoff, warm.start.log.
 #' @param njobs Number of cores used for the calculation. Default 1. 
 #' @param n_rep Number of repetition for each lam_values. Default 1.
 #' @param fdir Output file directory. Default ../output/
-#' @param seed Set random seed. Default 2018.
+#' @param seed LDA seed. Default 2019. If a vector, use the best seed in terms of likelihood.
 #' @return Plot number of interesting genes for different lambda values. Return table of lam_values and corresponding number of interesting genes.
 #' @examples
 #' \dontrun{
@@ -70,7 +70,13 @@ plda_choose_lambda <- function(dat, k, lam_values, idx_hk, njobs=1, n_rep=1, fdi
   if (file.exists(file.path(fdir, paste0('lda_ntopics_', k, '.rdata')))) {
     load(file.path(fdir, paste0('lda_ntopics_', k, '.rdata')))
   } else {
-    fit <- LDA(t(dat), k, control = list(seed=seed))
+    if (length(seed) == 1) {
+      fit <- LDA(t(dat), k, control = list(seed=seed))
+    } else {
+      print(sprintf('Getting best LDA from %d seeds.', length(seed)))
+      fit <- LDA(t(dat), k, control = list(seed=seed, nstart = length(seed)))
+    }
+    
     save(fit, file = file.path(fdir, paste0('lda_ntopics_', k, '.rdata')))
   }
   # warm start log beta
