@@ -20,6 +20,10 @@ plda_estimate_gamma_given_beta <- function(x, log_beta, seed=2018, verbose=FALSE
   n_docs <- nrow(x)
   genes <- colnames(x)
   k <- nrow(log_beta)
+  
+  if (ncol(log_beta) != n_vocab) {
+    stop('Dimension does no match between x and log_beta!')
+  }
 
   # parse input
   docs.parse <- function(docs.line) {
