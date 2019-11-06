@@ -5,7 +5,7 @@
 \title{pLDA Choose Shrinkage Parameter}
 \usage{
 plda_choose_lambda(dat, k, lam_values, idx_hk, njobs = 1, n_rep = 1,
-  fdir = NA, seed = 2018)
+  fdir = NA, seed = 2019)
 }
 \arguments{
 \item{dat}{Input matrix. A matrix of positive integers where rows represent genes (words) and columns represent cells (documents).}
@@ -22,7 +22,7 @@ plda_choose_lambda(dat, k, lam_values, idx_hk, njobs = 1, n_rep = 1,
 
 \item{fdir}{Output file directory. Default ../output/}
 
-\item{seed}{Set random seed. Default 2018.}
+\item{seed}{LDA seed. Default 2019. If a vector, use the best seed in terms of likelihood.}
 }
 \value{
 Plot number of interesting genes for different lambda values. Return table of lam_values and corresponding number of interesting genes.

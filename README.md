@@ -9,9 +9,8 @@ The package is maintained by Xiaotian (Kevin) Wu. Contact xiaotian_wu at brown d
 
 ## Install
 ```
-git clone https://github.com/wuxiaotiankevin/pLDA
-R CMD build pLDA
-R CMD INSTALL pLDA_0.1.2.tar.gz
+library(devtools)
+install_github("wuxiaotiankevin/pLDA", build_vignettes=TRUE)
 ```
 
 ## Quick Start

@@ -1,7 +1,0 @@
-\documentclass{article}
-\usepackage{pdfpages}
-%\VignetteIndexEntry{simulation}
-
-\begin{document}
-\includepdf[pages=-, fitpaper=true]{simulation.pdf}
-\end{document}
