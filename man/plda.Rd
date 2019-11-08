@@ -25,7 +25,7 @@ plda(x, k, lambda, warm.start.seed = 2017, verbose = FALSE,
 \item{pdata}{Default NULL. Table of phenotypic data.}
 }
 \value{
-plda() returns a list of the penalized LDA output.
+plda() returns a list of the penalized LDA output. logProbW is the log of topic by gene matrix beta. gamma is the cell by topic matrix of topic frequencies for each cell. genes are gene names extracted from the column name of input count matrix.
 }
 \description{
 The main function that runs penalized LDA.

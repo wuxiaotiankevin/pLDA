@@ -36,10 +36,10 @@ simulateCounts <- function(theta, beta, doc_length) {
   docs <- matrix(0, nrow = n_docs, ncol = n_vocab)
   for (i in 1:n_docs) {
     # draw topics for each word
-    tops <- rmultinom(1, doc_length[i], theta.true[i, ])
+    tops <- rmultinom(1, doc_length[i], theta[i, ])
     # draw words
     for (j in 1:n_topics) {
-      docs[i, ] <- docs[i, ] + rmultinom(1, tops[j], beta.true[j, ])
+      docs[i, ] <- docs[i, ] + rmultinom(1, tops[j], beta[j, ])
     }
   }
   return(docs)

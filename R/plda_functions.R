@@ -117,7 +117,7 @@ mstep.beta.start <- function(ldamodel,sstats, lam){
 #' @param warm.start.lda Default NULL. LDA object for warm start.
 #' @param warm.start.log.beta Default NULL. log beta matrix for warm start.
 #' @param pdata Default NULL. Table of phenotypic data.
-#' @return plda() returns a list of the penalized LDA output.
+#' @return plda() returns a list of the penalized LDA output. logProbW is the log of topic by gene matrix beta. gamma is the cell by topic matrix of topic frequencies for each cell. genes are gene names extracted from the column name of input count matrix.
 #' @examples
 #' \dontrun{
 #' plda(x=cell_by_gene_expr_matrix, k=10, lambda=10^3)
