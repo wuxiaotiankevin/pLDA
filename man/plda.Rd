@@ -32,6 +32,6 @@ The main function that runs penalized LDA.
 }
 \examples{
 \dontrun{
-plda(x=cell_by_gene_expr_matrix, k=10, lambda=10^3)
+plda(x=cell_by_gene_expr_matrix, k=10, lambda=5)
 }
 }

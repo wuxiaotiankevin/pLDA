@@ -120,7 +120,7 @@ mstep.beta.start <- function(ldamodel,sstats, lam){
 #' @return plda() returns a list of the penalized LDA output. logProbW is the log of topic by gene matrix beta. gamma is the cell by topic matrix of topic frequencies for each cell. genes are gene names extracted from the column name of input count matrix.
 #' @examples
 #' \dontrun{
-#' plda(x=cell_by_gene_expr_matrix, k=10, lambda=10^3)
+#' plda(x=cell_by_gene_expr_matrix, k=10, lambda=5)
 #' }
 plda <- function(x, 
                  k, 
